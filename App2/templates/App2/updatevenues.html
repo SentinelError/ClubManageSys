@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+{% extends 'App2/header.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+	<h1 id="header">Update Venue</h1>
+	<br/>
+	<form action="" method=POST class="frm">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<br/>
+		<input type="submit" value="Update" class="btn btn-secondary">
+
+{% else %}
+	<h1 id="head">Sorry! You Must Be Logged In To View This Page</h1>
+	<br/>
+	<p>Please <a href="/login">login</a> to edit the document</p>
+    </form>
+{% endif %}
+
+
+
+{% endblock %}
+
+</body>
+</html>

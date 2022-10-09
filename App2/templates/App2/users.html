@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+{% extends "App2/header.html" %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        {% if user.is_superuser %}
+
+            <h1 id="header">Club Users</h1>
+
+                <br/><br/>
+
+                {% for user in user1 %}
+
+                    <div class="card">
+                        <h5 class="card-header">
+                            Username: {{ user }}
+                        </h5>
+                        <div class="card-body">
+                            <p class="card-text"></p>
+                                <ul>
+                                    <li>First Name: {{ user.first_name }}</li>
+                                    <li>Last Name: {{ user.last_name }}</li>
+                                    <li>Email: {{ user.email }}</li>
+                                    <li>Field: {{ user.student.field }}</li>
+                                    <li>Year: {{ user.student.year }}</li>
+                                    <li>Club: {{ user.student.club }}</li>
+                                </ul>
+
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a href="/edituser" class="btn btn-outline-secondary">Edit User Details</a>
+                        </div>
+                    </div>
+
+                <br/><br/>
+                {% endfor %}
+            <ul class="pagination justify-content-center">
+                <a href="/printcsv" class="btn btn-primary">Print User CSV</a>
+            </ul>
+
+        {% endif %}
+
+    <br/><br/>
+
+    {% endif %}
+
+<nav aria-label="...">
+    <ul class="pagination">
+        {% if user1.has_previous %}
+
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ user1.previous_page_number }}">Previous</a></li>
+
+        {% endif %}
+
+        {% for i in pg %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+
+        {% endfor %}
+
+        {% if user1.has_next %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ user1.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ user1.paginator.num_pages }}">Last &raquo</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+
+
+{% endblock %}
+
+
+</body>
+</html>

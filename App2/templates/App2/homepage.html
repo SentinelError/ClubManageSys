@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+
+    {% extends "App2/header.html" %}
+
+    <title>Homepage</title>
+
+    <style>
+
+    </style>
+
+</head>
+
+    <body>
+
+    <br/>
+
+    <div class="container">
+
+    {% block content %}
+
+        <main>
+            <section id="title">
+                    <div class="section-inner">
+                        <center>
+                            <div class="p-3 mb-2 bg-custom-3 text-light rounded">
+                                <h1 class="display-1">CMS</h1>
+                            </div>
+                        </center>
+                    </div>
+            </section>
+            <section id="about">
+                <div class="section-inner">
+                        <br/><br/>
+                        <h2 id="head">About</h2>
+                        <p class="text">The target goal of this mini-project was to create a CLUB MANAGEMENT SYSTEM for the students or members of a club. The System is utilized to provide a streamlined service to both the club members and the Administrators of the club. The CMS covers everything from adding venues, to setting events to even writing reports about said events.</p>
+                        <br/><br/>
+                        <h2 id="first">Site Functions</h2>
+                        <p class="text">The goal of the project is to make a website offering all the previously mentioned functionalities and split it into 3 distinct tiers. They are:</p>
+                            <ul>
+                                <li id="A">The Administrator</li>
+                                <li id="B">The Representative</li>
+                                <li id="C">The Member</li>
+                            </ul>
+                        <br/><br/>
+                        <h2 id="second">The Roles</h2>
+                        <ul>
+                                <li id="D">The Administrator</li>
+                                <p class="text">Able to edit club rosters, manage members and edit the club calendar by adding events or practice dates, among other functions, the administrator holds the most power and control on the website.</p>
+                                <br/>
+                                <li id="E">The Representative</li>
+                                <p class="text">The Representative is the next tier under Admin. They also hold some control over the website
+                                    such as adding practice events and the functions of writing reports when the club attends external events.
+                                    They cannot add external events, manage club rosters and other fucntions afforded only to the Admin.</p>
+                                <br/>
+                                <li id="F">The Member</li>
+                                <p class="text">The Member has the least control over the website. They can login, view their events and edit their own user info.</p>
+                        </ul>
+                        <br/><br/>
+                        <p class="text"><a href="/login">Login</a> or <a href="/register">Register</a> to access our site</p>
+                </div>
+
+            </section>
+        </main>
+
+    {% endblock %}
+    </div>
+
+    </body>
+
+</html>
+
+
+

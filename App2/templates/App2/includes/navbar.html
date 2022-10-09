@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+
+    <style>
+
+    .bg-custom-4{
+        background-image: linear-gradient(15deg, #348F50 0%, #56B4D3 100%);
+    }
+
+    .bg-custom-3{
+        background-image: linear-gradient(15deg, #AA076B 0%, #61045F 100%);
+    }
+
+    .bg-custom-2 {
+        background-image: linear-gradient(15deg, #ee0979 0%, #ff6a00 100%);
+    }
+
+    .bg-custom-1 {
+        background-image: linear-gradient(15deg, #4A00E0 0%, #8E2DE2 100%);
+    }
+    </style>
+
+</head>
+<body>
+
+{% if user.is_authenticated %}
+
+    {% if user.is_superuser %}
+
+        <!--Admin Navbar-->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom-2">
+          <a class="navbar-brand" href="/">
+            <img src="https://aisat.ac.in/wp-content/uploads/2018/05/logo.png" class="rounded" width="30" height="30" alt="" loading="lazy">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav mr-auto">
+
+              <li class="nav-item active">
+                <a class="nav-link" href="clubhomepage">Homepage<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Venues
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                  <a class="dropdown-item" href="/venues">Venues</a>
+                  <a class="dropdown-item" href="/addvenue">Add Venue</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Events
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                  <a class="dropdown-item" href="/events">Events</a>
+                  <a class="dropdown-item" href="/addevent">Add Events</a>
+                  <a class="dropdown-item" href="/eventapproval">Event Approval</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/reports">View Archive</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users">View Users</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav">
+
+                <!--Login/Logout buttons-->
+                {% if user.is_authenticated %}
+
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Welcome, {{user.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                  <a class="dropdown-item" href="/edituser">Edit Profile</a>
+                  <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
+              </li>
+
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+
+                {% endif %}
+
+            </ul>
+          </div>
+        </nav>
+    {% elif user.is_staff %}
+
+        <!--Student Rep Navbar-->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-custom-1">
+            <a class="navbar-brand" href="/">
+                <img src="https://aisat.ac.in/wp-content/uploads/2018/05/logo.png" class="rounded" width="30" height="30" alt="" loading="lazy">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent8">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/clubhomepage">Homepage<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Events
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                  <a class="dropdown-item" href="/events">Events</a>
+                  <a class="dropdown-item" href="/addevent">Add Events</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Reports
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                  <a class="dropdown-item" href="/reports">Archive</a>
+                  <a class="dropdown-item" href="/addreport">Add Reports</a>
+                </div>
+              </li>
+            </ul>
+            <ul class="navbar-nav">
+                <!--Login/Logout buttons-->
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown9" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, {{user.username}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown9">
+                            <a class="dropdown-item" href="/edituser">Edit Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% else %}
+
+    <!--Student Navbar-->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-custom-4">
+            <a class="navbar-brand" href="/">
+                <img src="https://aisat.ac.in/wp-content/uploads/2018/05/logo.png" class="rounded" width="30" height="30" alt="" loading="lazy">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent9">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/clubhomepage">Homepage<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/events">Events</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav">
+                <!--Login/Logout buttons-->
+                {% if user.is_authenticated %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, {{user.username}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+                            <a class="dropdown-item" href="/edituser">Edit Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    {% endif %}
+
+{% else %}
+
+    <!--Unregistered User navbar-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">CMS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent3" aria-controls="navbarSupportedContent3" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent3">
+          <ul class="navbar-nav ml-auto">
+
+                <!--Login/Logout buttons-->
+                {% if user.is_authenticated %}
+
+                    {% if user.is_superuser %}
+
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/clubhomepage">Homepage<span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Welcome, {{user.username}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                                <a class="dropdown-item" href="/edituser">Edit Profile</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    {% else %}
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/clubhomepage">Homepage<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Welcome, {{user.username}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown7">
+                                <a class="dropdown-item" href="/edituser">Edit Profile</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                {% endif %}
+
+            {% else %}
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+      </div>
+    </nav>
+
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Venues</title>
+</head>
+<body>
+
+{% extends "App2/header.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<h1 id="header">Venues</h1>
+
+    <br/><br/>
+
+    {% for venue in venue1 %}
+
+    <div class="card">
+        <h5 class="card-header">
+            {{ venue }}
+        </h5>
+        <div class="card-body">
+            <h5 class="card-title">Location: {{ venue.address }}</h5>
+                <p class="card-text"></p>
+                    <ul>
+                        <li>Contact Number: {{ venue.phone }}</li>
+                    </ul>
+
+        </div>
+        <div class="card-footer text-muted">
+            <a href="/updatevenues/{{ venue.id }}" class="btn btn-outline-secondary">Edit Venue Details</a>
+            <a href="/deletevenue/{{ venue.id }}" class="btn btn-outline-danger">Delete</a>
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+{% endif %}
+{% else %}
+	<h1>Sorry! You must be logged in to view available venues.</h1>
+	<br/>
+	<p>Please <a href="/login">login</a> to access this page.</p>
+{% endif %}
+
+<br/><br/>
+
+
+<nav aria-label="...">
+    <ul class="pagination">
+        {% if venue1.has_previous %}
+
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ venue1.previous_page_number }}">Previous</a></li>
+
+        {% endif %}
+
+        {% for i in pg %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+
+        {% endfor %}
+
+        {% if venue1.has_next %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ venue1.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ venue1.paginator.num_pages }}">Last &raquo</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+
+
+
+
+{% endblock %}
+
+
+</body>
+</html>
+
+
+<!--<li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        <a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                2
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>-->

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% extends 'App2/header.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+	<h1 id="header">Add Report</h1>
+	<br/><br/>
+		<form action="" method=POST class="frm">
+			{% csrf_token %}
+
+			{{ form.media }}
+
+			{{ form.as_p }}
+
+			<input type="submit" value="Add" class="btn btn-secondary">
+		</form>
+
+{% else %}
+	<h1>Sorry! You must be logged in to add report.</h1>
+	<br/>
+	<p>Please <a href="/login">login</a> to access this page.</p>
+    </form>
+{% endif %}
+
+{% endblock %}
+
+</body>
+</html>

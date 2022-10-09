@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <h5 class="card-header">
+            Report Title: {{report}}
+    </h5>
+        <ul>
+            <li><h5 class="card-title">Event: {{ report.event }}</h5></li>
+            <li>Date: {{ report.report_date }}</li>
+            <li>Representative: {{ report.report_author }}</li>
+            <br/>
+            <li>Report: {{ report.body | safe}}</li>
+        </ul>
+</body>
+</html>

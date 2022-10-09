@@ -1,0 +1,23 @@
+{% extends 'App2/header.html' %}
+
+{% block content %}
+<!--this is a test-->
+{% if user.is_authenticated %}
+
+	<h1 id="header">Add Event</h1>
+	<br/><br/>
+		<form action="" method=POST class="frm">
+			{% csrf_token %}
+
+			{{ form.as_p }}
+			<br/>
+			<input type="submit" value="Add" class="btn btn-primary">
+
+{% else %}
+	<h1 id="head">Sorry! You must be logged in to Add Events.</h1>
+	<br/>
+	<p class="text">Please <a href="/login">login</a> to access this page.</p>
+    </form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Archive</title>
+</head>
+<body>
+{% extends "App2/header.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1 id="header">Reports Archive</h1>
+
+    <br/><br/>
+
+    {% for report in report1 %}
+
+    <div class="card">
+        <h5 class="card-header">
+            {{ report.title }}
+        </h5>
+        <div class="card-body">
+            <h5 class="card-title">Event: {{ report.event }}</h5>
+            <p class="card-text">
+
+                <ul>
+                <li>Date: {{ report.report_date }}</li>
+                <li>Representative: {{ report.report_author }}</li>
+                <li>Report: {{ report.body | safe }}</li>
+                </ul>
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="/updatereport/{{ report.id }}" class="btn btn-outline-secondary">Edit Report Details</a>
+            <a href="/deletereport/{{ report.id }}" class="btn btn-outline-danger">Delete</a>
+            <a href="/printreport/{{ report.id }}" class="btn btn-outline-primary">Print Report</a>
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+
+{% else %}
+	<h1>Sorry! You must be logged in to view club reports.</h1>
+	<br/>
+	<p>Please <a href="/login">login</a> to access this page.</p>
+    </form>
+{% endif %}
+
+<nav aria-label="...">
+    <ul class="pagination">
+        {% if report1.has_previous %}
+
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ report1.previous_page_number }}">Previous</a></li>
+
+        {% endif %}
+
+        {% for i in pg %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+
+        {% endfor %}
+
+        {% if report1.has_next %}
+
+            <li class="page-item"><a class="page-link" href="?page={{ report1.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ report1.paginator.num_pages }}">Last &raquo</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    {% extends 'App2/header.html' %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{static 'css/home.css'}">
+    <title>Club Homepage</title>
+
+</head>
+<body>
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+
+    <div>
+        <h1 id="header">Welcome, {{ user.first_name }}</h1>
+        <div class="container" id="cal">
+        <center>
+        <br/><br/>
+
+        {{ cal|safe }}
+
+        <br/><br/>
+        </center>
+        </div>
+        <h2 id="head">The following are the events you will be attending for the month of {{ month }}:</h2>
+
+        <br/><br/>
+
+        {% for event in events %}
+
+        {% if event.approved %}
+
+        <div class="card">
+            <h5 class="card-header">
+                {{ event }}
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title">Club: {{ event.event_club }}</h5>
+                <p class="card-text">
+
+                <ul>
+                    <li>Event Overseer: {{ event.overseer }}</li>
+                    <li>Venue: {{ event.venue }}</li>
+                    <li>Date: {{ event.event_date }}</li>
+                    <li>Description: {{ event.description }}</li>
+                    <li>Attendees:<br/>
+                        {% for user in event.attendees.all %}
+
+                        {{ user }}<br/>
+
+                        {% endfor %}
+                    </li>
+
+                </ul>
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        <br/><br/>
+        {% endfor %}
+
+    </div>
+
+{% else %}
+    <form>
+	<h1>Sorry! You must be logged in to view the Club Homepage</h1>
+	<br/>
+	<p>Please <a href="/login">login</a> to access this page.</p>
+    </form>
+{% endif %}
+
+{% endblock %}
+
+</body>
+</html>
