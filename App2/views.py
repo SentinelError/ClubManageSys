@@ -127,9 +127,13 @@ def clubhomepage(request, year=datetime.now().year, month=datetime.now().strftim
         cyear = now.year
 
         Identity = request.user.id
+        org = request.user.student.club
+
         events = Event.objects.filter(attendees=Identity,
+                                      event_club=org,
                                       event_date__year=year,
                                       event_date__month=monthnum).order_by('event_date')
+
         return render(request, 'App2/clubhomepage.html',
                       {"events": events,
                        "year": year,
@@ -148,13 +152,21 @@ def clubhomepage(request, year=datetime.now().year, month=datetime.now().strftim
 
 def events(request):
     if request.user.is_authenticated:
+        if request.user.is_superuser:
+            p = Paginator(Event.objects.all().order_by('event_date'), 3)
+            page = request.GET.get('page')
+            event1 = p.get_page(page)
+            pg = 'n' * event1.paginator.num_pages
 
-        p = Paginator(Event.objects.all().order_by('event_date'), 3)
-        page = request.GET.get('page')
-        event1 = p.get_page(page)
-        pg = 'n' * event1.paginator.num_pages
+            return render(request, 'App2/events.html', {'event1': event1, 'pg': pg})
+        else:
+            org = request.user.student.club
+            p = Paginator(Event.objects.filter(event_club=org).order_by('event_date'), 3)
+            page = request.GET.get('page')
+            event1 = p.get_page(page)
+            pg = 'n' * event1.paginator.num_pages
 
-        return render(request, 'App2/events.html', {'event1': event1, 'pg': pg})
+            return render(request, 'App2/events.html', {'event1': event1, 'pg': pg})
     else:
         messages.error(request, ("Please login to view events."))
         return HttpResponseRedirect('/homepage')
