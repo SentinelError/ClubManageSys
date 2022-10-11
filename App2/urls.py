@@ -30,4 +30,5 @@ urlpatterns = [
     path("password/", views.changepassword, name="changepassword" ),
     path("eventapproval", views.eventapproval, name="eventapproval"),
     path("users", views.users, name="users" ),
+    path("updateuser/<userid>", views.upduser, name="updateuser" ),
 ]

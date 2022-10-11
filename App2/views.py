@@ -376,6 +376,7 @@ def addreport(request):
         messages.error(request, "Please login to view Reports.")
         return HttpResponseRedirect('/')
 
+
 # Update Report View
 
 def updreport(request, reportid):
@@ -459,7 +460,7 @@ def users(request):
             user1 = p.get_page(page)
             pg = 'n' * user1.paginator.num_pages
 
-            return render(request, 'App2/users.html', {'user1': user1, 'pg': pg,})
+            return render(request, 'App2/users.html', {'user1': user1, 'pg': pg, })
 
         else:
             messages.error(request, "Only Admin can view users")
@@ -523,3 +524,32 @@ def printcsv(request):
             [user.username, user.first_name, user.last_name, user.email, student.club, student.field, student.year])
 
     return response
+
+
+def upduser(request, userid):
+    if request.user.is_authenticated:
+        user1 = User.objects.get(pk=userid)
+        if request.user.is_superuser:
+            form = NewEditForm(request.POST or None, instance=user1)
+            Sform = StudentForm(request.POST or None, instance=user1.student)
+
+            if form.is_valid() and Sform.is_valid():
+                user = form.save()
+
+                student = Sform.save(commit=False)
+                student.user = user
+
+                student.save()
+
+                messages.success(request, "Profile updated.")
+                return HttpResponseRedirect("/users")
+            # messages.error(request, "Unsuccessful update. Invalid information.")
+
+        else:
+            messages.error(request, "Only the Admin users.")
+            return HttpResponseRedirect('/users')
+
+    else:
+        messages.error(request, "Please login to edit users")
+        return HttpResponseRedirect('/')
+    return render(request=request, template_name="App2/updateuser.html", context={"edit_form": form, "Student": Sform})
