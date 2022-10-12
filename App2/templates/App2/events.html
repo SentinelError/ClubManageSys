@@ -21,7 +21,7 @@
         {% if user.is_superuser %}
 
             <h1 id="header">Events</h1>
-
+            <br/>
             <form class="form-inline my-2 my-lg-0" method=POST action="searchevent">
 
                 {% csrf_token %}
@@ -67,7 +67,15 @@
         {% elif user.is_staff %}
 
             <h1 id="head">Events</h1>
+            <br/>
+            <form class="form-inline my-2 my-lg-0" method=POST action="searchevent">
 
+                {% csrf_token %}
+
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Events" aria-label="Search" name="query1">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <br/><br/>
                 {% for event in event1 %}
 
                     <div class="card">
