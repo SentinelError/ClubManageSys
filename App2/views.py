@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .models import Event, Venue, Report, Student
+from django.db.models import Q
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -54,13 +55,44 @@ def edit_request(request):
 
             student.save()
 
-            messages.success(request, ("Profile updated."))
+            messages.success(request, "Profile updated.")
             return HttpResponseRedirect("/clubhomepage")
         messages.error(request, "Unsuccessful update. Invalid information.")
     else:
         form = NewEditForm(instance=request.user)
         Sform = StudentForm(instance=request.user.student)
     return render(request=request, template_name="App2/edituser.html", context={"edit_form": form, "Student": Sform})
+
+
+# Admin Edit User page
+
+def upduser(request, userid):
+    if request.user.is_authenticated:
+        user1 = User.objects.get(pk=userid)
+        if request.user.is_superuser:
+            form = NewEditForm(request.POST or None, instance=user1)
+            Sform = StudentForm(request.POST or None, instance=user1.student)
+
+            if form.is_valid() and Sform.is_valid():
+                user = form.save()
+
+                student = Sform.save(commit=False)
+                student.user = user
+
+                student.save()
+
+                messages.success(request, "Profile updated.")
+                return HttpResponseRedirect("/users")
+            # messages.error(request, "Unsuccessful update. Invalid information.")
+
+        else:
+            messages.error(request, "Only the Admin users.")
+            return HttpResponseRedirect('/users')
+
+    else:
+        messages.error(request, "Please login to edit users")
+        return HttpResponseRedirect('/')
+    return render(request=request, template_name="App2/updateuser.html", context={"edit_form": form, "Student": Sform})
 
 
 # Change Password View
@@ -170,6 +202,46 @@ def events(request):
     else:
         messages.error(request, ("Please login to view events."))
         return HttpResponseRedirect('/homepage')
+
+
+# Event Search Results
+
+def searchevent(request):
+    if request.method == "POST":
+        query1 = request.POST['query1']
+        events = Event.objects.filter(name__contains=query1)
+
+        return render(request, 'App2/searchevent.html', {'events': events, 'query1': query1})
+
+
+# Venue Search Results
+
+def searchvenue(request):
+    if request.method == "POST":
+        query2 = request.POST['query2']
+        venues = Venue.objects.filter(name__contains=query2)
+
+        return render(request, 'App2/searchvenue.html', {'venues': venues, 'query2': query2})
+
+
+# Report Search Results
+
+def searchreport(request):
+    if request.method == "POST":
+        query3 = request.POST['query3']
+        reports = Report.objects.filter(title__contains=query3)
+
+        return render(request, 'App2/searchreport.html', {'reports': reports, 'query3': query3})
+
+
+# User Search Results
+
+def searchuser(request):
+    if request.method == "POST":
+        query = request.POST['query']
+        users = User.objects.filter(Q(first_name__contains=query) | Q(username__contains=query))
+
+        return render(request, 'App2/searchuser.html', {'users': users, 'query': query})
 
 
 # Update Events View
@@ -524,32 +596,3 @@ def printcsv(request):
             [user.username, user.first_name, user.last_name, user.email, student.club, student.field, student.year])
 
     return response
-
-
-def upduser(request, userid):
-    if request.user.is_authenticated:
-        user1 = User.objects.get(pk=userid)
-        if request.user.is_superuser:
-            form = NewEditForm(request.POST or None, instance=user1)
-            Sform = StudentForm(request.POST or None, instance=user1.student)
-
-            if form.is_valid() and Sform.is_valid():
-                user = form.save()
-
-                student = Sform.save(commit=False)
-                student.user = user
-
-                student.save()
-
-                messages.success(request, "Profile updated.")
-                return HttpResponseRedirect("/users")
-            # messages.error(request, "Unsuccessful update. Invalid information.")
-
-        else:
-            messages.error(request, "Only the Admin users.")
-            return HttpResponseRedirect('/users')
-
-    else:
-        messages.error(request, "Please login to edit users")
-        return HttpResponseRedirect('/')
-    return render(request=request, template_name="App2/updateuser.html", context={"edit_form": form, "Student": Sform})

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "App2/header.html" %}
+
+{% block content %}
+
+    {% if query %}
+        <h1 id="header">Search Results:</h1>
+        <br/>
+        {% for report in reports %}
+
+            <div class="card">
+                <h5 class="card-header">
+                    {{ report.title }}
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title">Event: {{ report.event }}</h5>
+                    <p class="card-text">
+
+                        <ul>
+                        <li>Date: {{ report.report_date }}</li>
+                        <li>Representative: {{ report.report_author }}</li>
+                        <li>Report: {{ report.body | safe }}</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="/updatereport/{{ report.id }}" class="btn btn-outline-secondary">Edit Report Details</a>
+                    <a href="/deletereport/{{ report.id }}" class="btn btn-outline-danger">Delete</a>
+                    <a href="/printreport/{{ report.id }}" class="btn btn-outline-primary">Print Report</a>
+                </div>
+            </div>
+        <br/>
+        {% endfor %}
+    {% else %}
+        <h1 id="header">Invalid Input.</h1>
+        <br/><br/>
+        <p class="text"><a href="/reports">Return to Report Archive</a>
+    {% endif %}
+
+{% endblock %}
+</body>
+</html>

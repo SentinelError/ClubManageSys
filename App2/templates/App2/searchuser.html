@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "App2/header.html" %}
+
+{% block content %}
+
+    {% if query %}
+        <h1 id="header">Search Results:</h1>
+        <br/>
+        {% for user in users %}
+        <div class="card">
+            <h5 class="card-header">
+                Username: {{ user }}
+            </h5>
+            <div class="card-body">
+                <p class="card-text"></p>
+                <ul>
+                    <li>First Name: {{ user.first_name }}</li>
+                    <li>Last Name: {{ user.last_name }}</li>
+                    <li>Email: {{ user.email }}</li>
+                    <li>Field: {{ user.student.field }}</li>
+                    <li>Year: {{ user.student.year }}</li>
+                    <li>Club: {{ user.student.club }}</li>
+                </ul>
+
+            </div>
+            <div class="card-footer text-muted">
+                <a href="/updateuser/{{ user.id }}" class="btn btn-outline-secondary">Edit User Details</a>
+            </div>
+        </div>
+
+        <br/><br/>
+        {% endfor %}
+    {% else %}
+        <h1 id="header">Invalid Input.</h1>
+        <br/><br/>
+        <p class="text"><a href="/users">Return to Users</a>
+    {% endif %}
+
+{% endblock %}
+</body>
+</html>

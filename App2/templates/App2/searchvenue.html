@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "App2/header.html" %}
+
+{% block content %}
+
+    {% if query %}
+        <h1 id="header">Search Results:</h1>
+        <br/>
+        {% for venue in venues %}
+    <div class="card">
+        <h5 class="card-header">
+            {{ venue }}
+        </h5>
+        <div class="card-body">
+            <h5 class="card-title">Location: {{ venue.address }}</h5>
+            <p class="card-text"></p>
+            <ul>
+                <li>Contact Number: {{ venue.phone }}</li>
+            </ul>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="/updatevenues/{{ venue.id }}" class="btn btn-outline-secondary">Edit Venue Details</a>
+            <a href="/deletevenue/{{ venue.id }}" class="btn btn-outline-danger">Delete</a>
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+    {% else %}
+        <h1 id="header">Invalid Input.</h1>
+        <br/><br/>
+        <p class="text"><a href="/venues">Return to Venues</a>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

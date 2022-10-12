@@ -12,6 +12,13 @@
 {% if user.is_authenticated %}
 {% if user.is_superuser %}
 <h1 id="header">Venues</h1>
+<form class="form-inline my-2 my-lg-0" method=POST action="searchvenue">
+
+    {% csrf_token %}
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Venues" aria-label="Search" name="query2">
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+</form>
 
     <br/><br/>
 
