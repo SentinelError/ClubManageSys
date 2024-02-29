@@ -12,9 +12,9 @@ This project is a fully fuunctional Club Management Website for any Education In
 
 # Description
 
-I had built this project as my for an assignment in the 6th Semester of College timetable. After submission, I continued to tinker with it extensively working new functionalities. 
+During my 6th semester of college, I was tasked with building a functional website to manage club affairs and provide a centralized platform for club members to access information about activities and important dates. I decided to use Django for this project because of its robust support for Python and its seamless integration with HTML, CSS, and JavaScript.
 
-I was given the task of creating a functional website to manage club affairs and allow a singular place club members could go to find information on their club activities and important dates. As such, I began working on the idea for this website. I chose Django due to it's excellent coding support in allowing to work with Python code and connect that with HTML, CSS and Javascript. It's beginner friendly layout and how the templates are formed and linked through urls were quite intuitive and interesting. As the Web Application came together, **I built various levels of _user authorization_** :
+Django's beginner-friendly layout and the intuitive way in which templates are structured and linked through URLs made it an ideal choice for me. After submitting the initial assignment, I continued to enhance the project by adding new functionalities and refining existing features. As the Web Application came together, **I built various levels of _user authorization_** :
 
 _The Highest Level of authorization_ : **The SuperUser**
 
@@ -26,4 +26,12 @@ The StaffUser role was assigned to the Club Student Representatives. They had ac
 
 _The Clubber_ : **The User**
 
-The User role was assigned to the club members.
+The User role was assigned to the club members. They could login and view the events for the day and upcoming events for their club and that was it.
+
+_Who are you?_ : **The Non-User**
+
+This role was created so that new people coming to the Application wouldn't be kicked out immediately and instead ended up on the landing page.
+
+# Usage
+
+# Screenshots
