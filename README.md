@@ -41,5 +41,32 @@ The Following is a Use-Case Diagram at the inception of the project :
 
 # Screenshots
 
+The following Screenshots are various functions available to the SuperUser :
 
+
+
+
+![00 Admin Homepage](https://github.com/SentinelError/ClubManageSys/assets/71810497/fa59b3da-8d24-4b46-b4b8-ae77933bfdf5)
+
+![01 Admin Edit Profile](https://github.com/SentinelError/ClubManageSys/assets/71810497/b4271bea-ea04-47bd-b3c7-bf9876ed3e1f)
+
+![02 Admin Edit Password](https://github.com/SentinelError/ClubManageSys/assets/71810497/600e2db8-afb2-409e-af9b-09d53f0c66de)
+
+![03 Admin Available Venues](https://github.com/SentinelError/ClubManageSys/assets/71810497/444a50a8-2c7b-400e-9617-1cd1bad74c3c)
+
+![04 Admin Add Venue](https://github.com/SentinelError/ClubManageSys/assets/71810497/4e509e2d-28bd-4169-a226-2426b76fccac)
+
+![05 Admin View Club Users](https://github.com/SentinelError/ClubManageSys/assets/71810497/bdfe2183-312a-4b99-aac4-7de003e0d39f)
+
+![06 Admin Available Events](https://github.com/SentinelError/ClubManageSys/assets/71810497/abb7b5cd-4993-4ed7-9859-31c5a9014900)
+
+![07 Admin Add Events](https://github.com/SentinelError/ClubManageSys/assets/71810497/fdde23e2-c67f-41db-bedd-aed2beb90d77)
+
+![08 Admin Update Events](https://github.com/SentinelError/ClubManageSys/assets/71810497/3a00b550-1ece-41c9-9bc7-2fb708dae41b)
+
+![09 Admin Approve Events](https://github.com/SentinelError/ClubManageSys/assets/71810497/7dacbf2b-7e90-42a1-b198-f1ef906161b7)
+
+![10 Admin Report Archive](https://github.com/SentinelError/ClubManageSys/assets/71810497/168661da-0a8f-4c77-9ac2-e65940805f69)
+
+![11 Admin Update Report](https://github.com/SentinelError/ClubManageSys/assets/71810497/07cb7e50-15f6-4f6a-b2a1-31e63c22303d)
 
