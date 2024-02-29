@@ -34,4 +34,12 @@ This role was created so that new people coming to the Application wouldn't be k
 
 # Usage
 
+The Following is a Use-Case Diagram at the inception of the project :
+
+
+
+
 # Screenshots
+
+
+![MicrosoftTeams-image](https://github.com/SentinelError/ClubManageSys/assets/71810497/4bc345c3-aa3c-4d74-b46b-b37edbefcba1)
