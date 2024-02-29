@@ -18,4 +18,12 @@ I was given the task of creating a functional website to manage club affairs and
 
 _The Highest Level of authorization_ : **The SuperUser**
 
-The SuperUser role was assigned to the Club Managers. [The teacher assigned to club] They had control over almost all of the functionalties the App provided from Venue creation to editing User data. However they weren't allowed to write reports as that functionality was explicitly reserved for the Student Representatives of the clubs.
+The SuperUser role was assigned to the Club Managers. [The teacher assigned to club] They had control over almost all of the functionalties the App provided from Venue creation to editing User data. They could assign new events as well as competetion events. However they weren't allowed to write reports of events as that functionality was explicitly reserved for the Student Representatives of the clubs.
+
+_The Middleman_ : **The StaffUser**
+
+The StaffUser role was assigned to the Club Student Representatives. They had access to limited functionalities such as creation of **_training events only_** and **_the creation of event reports._**
+
+_The Clubber_ : **The User**
+
+The User role was assigned to the club members.
